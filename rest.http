@@ -1,7 +1,23 @@
-@baseUrl= http://localhost:8000
+@baseUrl= http://localhost:8000/api/v1/users
 
 
 
 ### Testing API
 
+### User
+### GetUser
+
 GET {{baseUrl}}
+
+
+### POST new user
+
+POST  {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "asmita1",
+    "email": "asmita1@gmail.com",
+    "password":"123"
+}
+

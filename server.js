@@ -1,8 +1,18 @@
 import express from "express";
+import userRouter from "./routers/userRouter.js";
+import { conMongoDb } from "./config/mongodbConfig.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+//!connect Databse
+conMongoDb();
+
+//!middlewares
+app.use(express.json());
+
+//!API endpoints
+app.use("/api/v1/users", userRouter);
 app.get("/", (req, res) => {
   res.json({
     message: "its live",

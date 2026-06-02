@@ -1,6 +1,7 @@
 import express from "express";
 import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcryptjs.js";
+import { signJWT } from "../utils/jwt.js";
 const router = express.Router();
 
 //!user signup
@@ -52,10 +53,12 @@ router.post("/login", async (req, res, next) => {
         if (isMatched) {
           //the user actually authenticated
           //JWT token can be generated here and sent to the client for future authentication
+          const accessJWT = signJWT({ email: user.email });
           res.json({
             status: "Success",
             message: "Login successful",
             user,
+            accessJWT,
           });
         }
       }

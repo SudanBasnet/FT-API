@@ -10,3 +10,7 @@ export const hashPassword = (plainPassword) => {
     throw new Error("Error hashing password");
   }
 };
+
+export const comparePassword = (plainPassword, hashedPassword) => {
+  return bcrypt.compareSync(plainPassword, hashedPassword);
+};

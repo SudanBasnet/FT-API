@@ -16,8 +16,19 @@ POST  {{baseUrl}}
 Content-Type: application/json
 
 {
-    "name": "asmita1",
-    "email": "asmita1@gmail.com",
+    "name": "asmaita12",
+    "email": "asmita12@gmail.com",
     "password":"123"
 }
 
+
+### login  user
+
+POST  {{baseUrl}}/login
+Content-Type: application/json
+
+{
+
+    "email": "asmita12@gmail.com",
+    "password":"123"
+}

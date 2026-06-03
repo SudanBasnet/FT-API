@@ -2,6 +2,7 @@ import express from "express";
 import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcryptjs.js";
 import { signJWT } from "../utils/jwt.js";
+import { auth } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 //!user signup
@@ -54,7 +55,7 @@ router.post("/login", async (req, res, next) => {
           //the user actually authenticated
           //JWT token can be generated here and sent to the client for future authentication
           const accessJWT = signJWT({ email: user.email });
-          res.json({
+          return res.json({
             status: "Success",
             message: "Login successful",
             user,
@@ -79,5 +80,21 @@ router.post("/login", async (req, res, next) => {
 });
 
 //!user Profile
+
+router.get("/", auth, (req, res, next) => {
+  try {
+    const user = req.userInfo;
+    res.json({
+      status: "Success",
+      message: "This is the user profile route",
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      message: error.message,
+    });
+  }
+});
 
 export default router;

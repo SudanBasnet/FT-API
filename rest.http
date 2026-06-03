@@ -8,7 +8,7 @@
 ### GetUser
 
 GET {{baseUrl}}
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDQ4MjE1NSwiZXhwIjoxNzgwNDgyMjE1fQ.cvNe9bnGr5P-n8bkjwMUYQG60c7whcBuP2pCXpAu_Oo
 
 ### POST new user
 

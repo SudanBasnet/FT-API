@@ -39,12 +39,17 @@ Content-Type: application/json
 ### Post new transacitons
 POST {{baseUrl}}/transactions
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU1OTEwMCwiZXhwIjoxNzgwNjQ1NTAwfQ.3A1GhyE7a6bA2yGCGX8INdG6E5RZU_4Eog6zdUN_NDw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU2MTU1MywiZXhwIjoxNzgwNjQ3OTUzfQ.T1y1Ox0kvatXMFpaKM2r3_K21J6eOZ61jjsPAWLHVK8
 
 {
     "type":"income",
     "title": "Salary",
     "amount": 2345,
-    "tdate": "2-3-2024"
+    "tdate": "2024-05-07"
 
 }
+
+### Get all transactions
+
+GET {{baseUrl}}/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU2NTcxMywiZXhwIjoxNzgwNjUyMTEzfQ.dhcAbsIjOrZStu_m_Wsmey4r9Swg_6UYl3R4bHy_nlQ

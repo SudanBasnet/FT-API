@@ -1,4 +1,4 @@
-@baseUrl= http://localhost:8000/api/v1/users
+@baseUrl= http://localhost:8000/api/v1
 
 
 
@@ -8,11 +8,11 @@
 ### GetUser
 
 GET {{baseUrl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDQ4MjE1NSwiZXhwIjoxNzgwNDgyMjE1fQ.cvNe9bnGr5P-n8bkjwMUYQG60c7whcBuP2pCXpAu_Oo
+Authorization: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU1OTEwMCwiZXhwIjoxNzgwNjQ1NTAwfQ.3A1GhyE7a6bA2yGCGX8INdG6E5RZU_4Eog6zdUN_NDw
 
 ### POST new user
 
-POST  {{baseUrl}}
+POST  {{baseUrl}}/users
 Content-Type: application/json
 
 {
@@ -24,11 +24,27 @@ Content-Type: application/json
 
 ### login  user
 
-POST  {{baseUrl}}/login
+POST  {{baseUrl}}/users/login
 Content-Type: application/json
 
 {
 
     "email": "asmita12@gmail.com",
     "password":"123"
+}
+
+
+### Transactions: all private routers
+
+### Post new transacitons
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU1OTEwMCwiZXhwIjoxNzgwNjQ1NTAwfQ.3A1GhyE7a6bA2yGCGX8INdG6E5RZU_4Eog6zdUN_NDw
+
+{
+    "type":"income",
+    "title": "Salary",
+    "amount": 2345,
+    "tdate": "2-3-2024"
+
 }

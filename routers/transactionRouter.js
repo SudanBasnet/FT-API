@@ -3,6 +3,7 @@ import {
   deleteTransactions,
   getTransaction,
   insertTransaction,
+  updateTransaction,
 } from "../models/transaction/TransactionModel.js";
 
 const router = express.Router();
@@ -42,6 +43,37 @@ router.get("/", async (req, res, next) => {
       status: "success",
       message: "Transactions fetched",
       transactions,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//!update transaction
+router.put("/:id", async (req, res, next) => {
+  try {
+    const { _id } = req.userInfo;
+    const { id } = req.params;
+    const { type, title, amount, tdate } = req.body;
+
+    const result = await updateTransaction(_id, id, {
+      type,
+      title,
+      amount,
+      tdate,
+    });
+
+    if (!result?._id) {
+      return res.status(404).json({
+        status: "error",
+        message: "Transaction not found or you are not allowed to edit it",
+      });
+    }
+
+    res.json({
+      status: "success",
+      message: "Transaction updated",
+      result,
     });
   } catch (error) {
     next(error);

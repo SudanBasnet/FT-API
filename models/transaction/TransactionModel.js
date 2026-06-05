@@ -16,3 +16,11 @@ export const getTransaction = (userId) => {
 export const deleteTransactions = (userId, idsToDelete) => {
   return TransactionSchema.deleteMany({ userId, _id: { $in: idsToDelete } });
 };
+
+export const updateTransaction = (userId, transactionId, updateObj) => {
+  return TransactionSchema.findOneAndUpdate(
+    { _id: transactionId, userId },
+    updateObj,
+    { new: true, runValidators: true },
+  );
+};

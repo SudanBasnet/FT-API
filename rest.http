@@ -63,3 +63,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdt
 {
     "ids": ["6a21379d640eefe7f1017067", "6a2137d665011b11f961cb2c"]
 }
+
+### Edit transaction for user
+
+PUT {{baseUrl}}/transactions/TRANSACTION_ID_HERE
+Content-Type: application/json
+Authorization: your_token_here
+
+{
+    "type": "expenses",
+    "title": "Updated title",
+    "amount": 125,
+    "tdate": "2026-06-05"
+}

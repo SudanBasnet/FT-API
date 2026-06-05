@@ -5,9 +5,25 @@ import { signJWT } from "../utils/jwt.js";
 import { auth } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
+const isValidPassword = (password = "") => {
+  const hasMinLength = password.length >= 5;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasSpecialCharacter = /[^A-Za-z0-9]/.test(password);
+
+  return hasMinLength && hasUpperCase && hasSpecialCharacter;
+};
+
 //!user signup
 router.post("/", async (req, res, next) => {
   try {
+    if (!isValidPassword(req.body.password)) {
+      return res.status(400).json({
+        status: "Error",
+        message:
+          "Password must be at least 5 characters and include one uppercase letter and one special character.",
+      });
+    }
+
     //*encript the password
     req.body.password = hashPassword(req.body.password);
     const user = await insertUser(req.body);

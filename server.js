@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 //!connect Databse
-conMongoDb();
+await conMongoDb();
 
 //!middlewares
 app.use(express.json());

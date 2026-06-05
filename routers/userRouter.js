@@ -8,12 +8,9 @@ const router = express.Router();
 //!user signup
 router.post("/", async (req, res, next) => {
   try {
-    //* get the user obj
-    //*data verification
     //*encript the password
     req.body.password = hashPassword(req.body.password);
     const user = await insertUser(req.body);
-    console.log(req.body.password);
 
     user?._id
       ? res.json({
@@ -26,15 +23,11 @@ router.post("/", async (req, res, next) => {
           message: "Error Creating User. Please try again later",
         });
   } catch (error) {
-    let msg = error.message;
-    if (msg.includes("E11000 duplicate key error collection")) {
-      msg = "Email already exists. Please use a different email.";
+    if (error.message.includes("E11000 duplicate key error collection")) {
+      error.message = "Email already exists. Please use a different email.";
     }
-    console.log(error);
-    res.json({
-      status: "Error",
-      message: msg,
-    });
+    error.statusCode = 200;
+    next(error);
   }
 });
 
@@ -43,7 +36,6 @@ router.post("/login", async (req, res, next) => {
   try {
     //* get the user obj
     const { email, password } = req.body;
-    console.log(req.body);
     //*data verification
     if (email && password) {
       //* finding user by email
@@ -52,7 +44,6 @@ router.post("/login", async (req, res, next) => {
       if (user?._id) {
         const isMatched = await comparePassword(password, user.password);
         if (isMatched) {
-          //the user actually authenticated
           //JWT token can be generated here and sent to the client for future authentication
           const accessJWT = signJWT({ email: user.email });
           return res.json({
@@ -64,18 +55,13 @@ router.post("/login", async (req, res, next) => {
         }
       }
     }
-    //*encript the password and compare with the one in the database
+    //*encrypt the password and compare with the one in the database
 
     res.status(401).json({
-      status: "Error",
       message: "Invalid email or password",
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      status: "Error",
-      message: error.message,
-    });
+    next(error);
   }
 });
 
@@ -90,10 +76,7 @@ router.get("/", auth, (req, res, next) => {
       user,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      message: error.message,
-    });
+    next(error);
   }
 });
 

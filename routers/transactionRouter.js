@@ -25,10 +25,7 @@ router.post("/", async (req, res, next) => {
           result,
         });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message,
-    });
+    next(error);
   }
 });
 
@@ -47,36 +44,34 @@ router.get("/", async (req, res, next) => {
       transactions,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      status: "error",
-      message: error.message,
-    });
+    next(error);
   }
 });
 
 //!delete transactions
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   try {
     //receive ids and id of user
     const { ids } = req.body;
 
     const { _id } = req.userInfo;
-    console.log(ids, _id);
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({
+        status: "error",
+        message: "Please provide transaction ids to delete",
+      });
+    }
 
     //perform deletion query
     const result = await deleteTransactions(_id, ids);
 
     res.json({
-      status: "Success",
-      message: result.deletedCount + " transaction to be deleted",
+      status: "success",
+      message: result.deletedCount + " transaction deleted",
     });
   } catch (error) {
-    console.log(error);
-    res.json({
-      status: "error",
-      message: error.message,
-    });
+    next(error);
   }
 });
 

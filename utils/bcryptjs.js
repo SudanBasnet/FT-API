@@ -6,7 +6,6 @@ export const hashPassword = (plainPassword) => {
     const salt = bcrypt.hashSync(plainPassword, saltRound);
     return salt;
   } catch (error) {
-    console.log(error);
     throw new Error("Error hashing password");
   }
 };

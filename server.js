@@ -4,6 +4,7 @@ import { conMongoDb } from "./config/mongodbConfig.js";
 import transactionRouter from "./routers/transactionRouter.js";
 import cors from "cors";
 import { auth } from "./middlewares/authMiddleware.js";
+import { errorHandler } from "./middlewares/errorHandlerMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -24,6 +25,16 @@ app.get("/", (req, res) => {
     status: 200,
   });
 });
+
+//!404 Page not found
+app.use((req, res, next) => {
+  const error = new Error("Not Found");
+  error.statusCode = 404;
+  next(error);
+});
+
+//!Global Error Handler
+app.use(errorHandler);
 
 app.listen(PORT, (error) => {
   error

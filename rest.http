@@ -29,8 +29,8 @@ Content-Type: application/json
 
 {
 
-    "email": "asmita12@gmail.com",
-    "password":"123"
+    "email": "sdnbasnet4@gmail.com",
+    "password":"asdf"
 }
 
 
@@ -52,4 +52,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdt
 ### Get all transactions
 
 GET {{baseUrl}}/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkbmJhc25ldDRAZ21haWwuY29tIiwiaWF0IjoxNzgwNTgyOTA0LCJleHAiOjE3ODA2NjkzMDR9.lhIaa427m9Sg_RqNUuRelusIhIv_mt3cCbrblLzDn8s
+
+### Delete transaction for user
+
+DELETE {{baseUrl}}/transactions
+Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzbWl0YTEyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDU2NTcxMywiZXhwIjoxNzgwNjUyMTEzfQ.dhcAbsIjOrZStu_m_Wsmey4r9Swg_6UYl3R4bHy_nlQ
+
+{
+    "ids": ["6a21379d640eefe7f1017067", "6a2137d665011b11f961cb2c"]
+}
